@@ -3,12 +3,39 @@ version: '3'
 services:
   db:
     image: postgres
+  
+  redis:
+    hostname: redis
+    image: redis
+    ports:
+     - 6379:6379
+
   django:
     build: .
     command: ./start.sh
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - 8000:8000
     depends_on:
       - db
+      - redis
+
+  worker:
+    build: .
+    command: celery -A celeryapp worker -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+
+  # flower:
+  #   image: zoomeranalytics/flower:0.9.1-4.0.2
+  #   restart: "no"
+  #   ports:
+  #     - "5555:5555"
+  #   depends_on:
+  #     - redis
+  
+  
