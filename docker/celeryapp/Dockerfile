@@ -4,7 +4,6 @@ RUN mkdir /app
 WORKDIR /app
 COPY requirements.txt /app/
 COPY start.sh /app/
-COPY run_celery.sh /app/
 
 RUN pip install -r requirements.txt
 

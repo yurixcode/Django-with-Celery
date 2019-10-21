@@ -5,13 +5,16 @@ services:
     image: postgres
   
   redis:
-    hostname: redis
     image: redis
     ports:
      - 6379:6379
+    entrypoint: redis-server --appendonly yes
+    restart: always
 
   django:
-    build: .
+    build: 
+      context: .
+      dockerfile: ./docker/celeryapp/Dockerfile
     command: ./start.sh
     volumes:
       - .:/app
@@ -22,7 +25,9 @@ services:
       - redis
 
   worker:
-    build: .
+    build: 
+      context: .
+      dockerfile: ./docker/worker/Dockerfile
     command: ./run_celery.sh
     volumes:
       - .:/app
