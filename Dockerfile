@@ -3,6 +3,9 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /app
 WORKDIR /app
 COPY requirements.txt /app/
+COPY start.sh /app/
+COPY run_celery.sh /app/
+
 RUN pip install -r requirements.txt
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -

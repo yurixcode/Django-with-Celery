@@ -23,7 +23,7 @@ services:
 
   worker:
     build: .
-    command: celery -A celeryapp worker -l info
+    command: ./run_celery.sh
     volumes:
       - .:/app
     depends_on:
