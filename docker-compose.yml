@@ -5,7 +5,7 @@ services:
     image: postgres
   
   redis:
-    image: redis
+    image: redis:alpine
     ports:
      - 6379:6379
     entrypoint: redis-server --appendonly yes
@@ -15,7 +15,7 @@ services:
     build: 
       context: .
       dockerfile: ./docker/celeryapp/Dockerfile
-    command: ./start.sh
+    command: ./scripts/start.sh
     volumes:
       - .:/app
     ports:
@@ -28,19 +28,9 @@ services:
     build: 
       context: .
       dockerfile: ./docker/worker/Dockerfile
-    command: ./run_celery.sh
+    command: ./scripts/run_celery.sh
     volumes:
-      - .:/app
+      - .:/worker
     depends_on:
       - db
       - redis
-
-  # flower:
-  #   image: zoomeranalytics/flower:0.9.1-4.0.2
-  #   restart: "no"
-  #   ports:
-  #     - "5555:5555"
-  #   depends_on:
-  #     - redis
-  
-  

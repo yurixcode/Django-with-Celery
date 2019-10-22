@@ -1,5 +1,0 @@
-apps:
-  - name     : 'django'
-    script   : ./start.sh
-  - name     : 'redis'
-    script   : ./run_redis.sh
