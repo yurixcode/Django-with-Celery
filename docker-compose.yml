@@ -28,7 +28,7 @@ services:
     build: 
       context: .
       dockerfile: ./docker/worker/Dockerfile
-    command: ./scripts/run_celery.sh
+    # command: ./scripts/run_celery.sh
     volumes:
       - .:/worker
     depends_on:
