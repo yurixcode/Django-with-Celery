@@ -15,7 +15,7 @@ def random_data():
 def launch_simulation():
     response = requests.post(url=API_URL, data=random_data())
     if response:
-        print('New task launched: ', r.json()['url'])
+        print('New task launched: ', response.json()['url'])
     else:
         print('Error launching task')
 

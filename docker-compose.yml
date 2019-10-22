@@ -11,6 +11,16 @@ services:
     entrypoint: redis-server --appendonly yes
     restart: always
 
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3.6.0
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=mypass
+    ports:
+      - 5672:5672
+      - 15672:15672
+
   django:
     build: 
       context: .
@@ -23,6 +33,7 @@ services:
     depends_on:
       - db
       - redis
+      - rabbit
 
   worker:
     build: 
@@ -34,13 +45,17 @@ services:
     depends_on:
       - db
       - redis
+      - rabbit
 
   flower:
     image: mher/flower
     ports:
       - 5555:5555
     environment:
-      - CELERY_BROKER_URL=redis://redis:6379
+      - CELERY_BROKER_URL=amqp://admin:mypass@rabbit:5672
       - FLOWER_PORT=5555
-    depends_on:
+    links:
       - redis
+      - rabbit
+    depends_on:
+      - worker
