@@ -13,4 +13,4 @@ RUN npm install pm2 -g
 
 COPY . /worker/
 
-CMD pm2-runtime ecosystem.config.js
+#CMD pm2-runtime ecosystem.config.js
