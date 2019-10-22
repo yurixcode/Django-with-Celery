@@ -34,3 +34,13 @@ services:
     depends_on:
       - db
       - redis
+
+  flower:
+    image: mher/flower
+    ports:
+      - 5555:5555
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379
+      - FLOWER_PORT=5555
+    depends_on:
+      - redis
