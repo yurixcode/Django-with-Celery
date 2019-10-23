@@ -11,7 +11,7 @@ class Job(models.Model):
     )
 
     id = serializers.IntegerField(read_only=True)
-    status = models.CharField(choices=STATUSES, max_length=20)
+    status = models.CharField(choices=STATUSES, max_length=20, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     argument = models.PositiveIntegerField()
