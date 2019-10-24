@@ -22,13 +22,13 @@ para Windows: https://store.docker.com/editions/community/docker-ce-desktop-wind
 
 La instalación consta de la preparación del entorno en docker junto con la instalación de dependencias.
 
-```bash
+```
 $ virtualenv env
 $ env\Scripts\activate
 $ pip install -r requirements
 ```
 
-```bash
+```
 $ docker-compose build
 $ docker-compose up
 ```
@@ -42,6 +42,10 @@ $ virtualenv env
 $ env\Scripts\activate
 $ pip install -r requirements
 ```
+
+## Cómo realizar pruebas
+
+TODO
 
 
 ## Tecnologías
