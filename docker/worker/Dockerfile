@@ -3,7 +3,8 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /worker
 WORKDIR /worker
 COPY requirements/worker/requirements.txt /worker/
-COPY scripts/run_celery.sh /worker/
+COPY scripts/run_celery_multi.sh /worker/
+COPY scripts/run_celery_pm2.sh /worker/
 
 RUN pip install -r requirements.txt
 
