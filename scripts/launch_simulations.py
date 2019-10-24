@@ -3,7 +3,7 @@ import time
 import requests
 import random
 
-API_URL = 'http://0.0.0.0:8000/jobs/'
+API_URL = 'http://localhost:8000/jobs/'
 NSIM_DEFAULT = 20
 
 def random_sleep():

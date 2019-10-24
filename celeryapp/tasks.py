@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from functools import wraps
 import time
+import random
 from .celery import app
 from .models import Job
 
@@ -30,6 +31,6 @@ def update_job(fn):
 @update_job
 def runSimulation(n):
     print('Starting simulation') 
-    time.sleep(20)
+    time.sleep(random.randint(1, 60))
     print('Simulation finished')
-    return n + 10
+    return n + random.randint(1, 100)
