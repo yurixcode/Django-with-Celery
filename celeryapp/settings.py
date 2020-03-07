@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'celeryapp.wsgi.application'
 DATABASES = {  
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_ENV_DB', 'postgres'),
-        'USER': os.environ.get('DB_ENV_POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_ENV_POSTGRES_PASSWORD', 'postgres'),
-        'HOST': os.environ.get('DB_PORT_5432_TCP_ADDR', 'db'),
-        'PORT': os.environ.get('DB_PORT_5432_TCP_PORT', ''),
+        'NAME': os.environ.get('DB_NAME', 'postgres'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASS', 'postgres'),
+        'HOST': os.environ.get('DB_HOST', 'db'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     },
 }
 
@@ -140,16 +140,16 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
-RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'rabbit')
+# RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'rabbit')
 
-if RABBIT_HOSTNAME.startswith('tcp://'):  
-    RABBIT_HOSTNAME = RABBIT_HOSTNAME.split('//')[1]
+# if RABBIT_HOSTNAME.startswith('tcp://'):  
+#     RABBIT_HOSTNAME = RABBIT_HOSTNAME.split('//')[1]
 
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', '')
 
-if not CELERY_BROKER_URL:
-    CELERY_BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}/'.format(
-            user=os.environ.get('RABBIT_ENV_USER', 'admin'),
-            password=os.environ.get('RABBIT_ENV_RABBITMQ_PASS', 'mypass'),
-            hostname=RABBIT_HOSTNAME,
-            vhost=os.environ.get('RABBIT_ENV_VHOST', ''))
+# if not CELERY_BROKER_URL:
+#     CELERY_BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}/'.format(
+#             user=os.environ.get('RABBIT_ENV_USER', 'admin'),
+#             password=os.environ.get('RABBIT_ENV_RABBITMQ_PASS', 'mypass'),
+#             hostname=RABBIT_HOSTNAME,
+#             vhost=os.environ.get('RABBIT_ENV_VHOST', ''))
