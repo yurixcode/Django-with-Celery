@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'celeryapp',
+    'reports',
 ]
 
 MIDDLEWARE = [
@@ -140,16 +141,16 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
-# RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'rabbit')
+RABBIT_HOSTNAME = os.environ.get('RABBIT_PORT_5672_TCP', 'rabbit')
 
-# if RABBIT_HOSTNAME.startswith('tcp://'):  
-#     RABBIT_HOSTNAME = RABBIT_HOSTNAME.split('//')[1]
+if RABBIT_HOSTNAME.startswith('tcp://'):  
+    RABBIT_HOSTNAME = RABBIT_HOSTNAME.split('//')[1]
 
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', '')
 
-# if not CELERY_BROKER_URL:
-#     CELERY_BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}/'.format(
-#             user=os.environ.get('RABBIT_ENV_USER', 'admin'),
-#             password=os.environ.get('RABBIT_ENV_RABBITMQ_PASS', 'mypass'),
-#             hostname=RABBIT_HOSTNAME,
-#             vhost=os.environ.get('RABBIT_ENV_VHOST', ''))
+if not CELERY_BROKER_URL:
+    CELERY_BROKER_URL = 'amqp://{user}:{password}@{hostname}/{vhost}/'.format(
+            user=os.environ.get('RABBIT_ENV_USER', 'admin'),
+            password=os.environ.get('RABBIT_ENV_RABBITMQ_PASS', 'mypass'),
+            hostname=RABBIT_HOSTNAME,
+            vhost=os.environ.get('RABBIT_ENV_VHOST', ''))

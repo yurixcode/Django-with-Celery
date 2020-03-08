@@ -3,3 +3,4 @@ djangorestframework==3.10.3
 psycopg2-binary==2.8.3
 celery==4.3.0
 redis==3.3.11
+XlsxWriter==1.2.8
